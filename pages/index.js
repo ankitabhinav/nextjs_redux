@@ -1,8 +1,15 @@
 import Head from 'next/head'
 import Image from 'next/image'
 import styles from '../styles/Home.module.css'
+import {useSelector, useDispatch} from 'react-redux'
 
 export default function Home() {
+  const counter = useSelector((state) => state.form)
+  const dispatch = useDispatch()
+
+  const handleClick = () => {
+    dispatch({type: 'CHANGE_JOB_TITLE', payload: 'helllo'})
+  }
   return (
     <div className={styles.container}>
       <Head>
@@ -15,9 +22,11 @@ export default function Home() {
         <h1 className={styles.title}>
           Welcome to <a href="https://nextjs.org">Next.js!</a>
         </h1>
+        <button onClick={() => console.log(counter)}>show state</button>
+        <button onClick={handleClick}>change job</button>
 
         <p className={styles.description}>
-          Get started by editing{' '}
+          Get started by editing{' '} {counter.job_title}
           <code className={styles.code}>pages/index.js</code>
         </p>
 
